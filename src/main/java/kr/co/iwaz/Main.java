@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         System.out.println("TwinGateway starting...");
 
         // 환경 설정 폴더 경로
