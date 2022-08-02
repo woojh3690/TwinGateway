@@ -12,7 +12,7 @@ public abstract class TwinDB implements Runnable {
             queue = new LinkedBlockingQueue<>();
     }
 
-    public void store(StoreJob job) throws InterruptedException {
+    public static void store(StoreJob job) throws InterruptedException {
         queue.put(job);
     }
 
