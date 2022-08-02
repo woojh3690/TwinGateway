@@ -1,4 +1,6 @@
-package kr.co.iwaz.db;
+package kr.co.iwaz.db.maria;
+
+import kr.co.iwaz.db.TwinDB;
 
 public class MariaDB extends TwinDB {
     public final int id;

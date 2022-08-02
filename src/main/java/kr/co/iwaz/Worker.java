@@ -1,6 +1,6 @@
 package kr.co.iwaz;
 
-import kr.co.iwaz.db.MariaDB;
+import kr.co.iwaz.db.maria.MariaDB;
 import kr.co.iwaz.db.StoreJob;
 import kr.co.iwaz.db.TwinDB;
 import kr.co.iwaz.kafka.KafkaConsumerEZ;
