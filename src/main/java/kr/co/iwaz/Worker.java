@@ -33,12 +33,14 @@ public class Worker {
     }
 
     public void run() throws InterruptedException {
-        for (ConsumerRecord<String, Object> msg : kafka.getRecords()) {
-            String value = (String)msg.value();
-            // TODO 1 유효성 검사
+        while (true) {
+            for (ConsumerRecord<String, Object> msg : kafka.getRecords()) {
+                String value = (String)msg.value();
+                // TODO 1 유효성 검사
 
-            // 데이터 저장
-            TwinDB.store(new StoreJob("dataCode", "datetime", value));
+                // 데이터 저장
+                TwinDB.store(new StoreJob("dataCode", "datetime", value));
+            }
         }
     }
 }

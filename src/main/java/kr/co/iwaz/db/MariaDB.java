@@ -8,6 +8,7 @@ public class MariaDB extends TwinDB {
 
     @Override
     public void receiveJob(String dataCode, String datetime, String value) {
-        // TODO
+        String format = "dataCode: %s, datetime: %s, value: %s";
+        System.out.printf((format) + "%n", dataCode, datetime, value);
     }
 }
