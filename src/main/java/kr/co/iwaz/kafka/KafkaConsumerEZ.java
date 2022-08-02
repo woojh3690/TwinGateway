@@ -5,58 +5,14 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import java.util.UUID;
 
 public class KafkaConsumerEZ {
     private final KafkaConsumer<String, Object> consumer;
     private final int pollWaitingMS;
-
-    public static class Builder {
-        private final String ip;
-        private final int port;
-        private final List<String> topics;
-        private String groupName;
-        private int sizeBatchReceive = 1;
-        private int pollWaitingMS = 1000;
-
-        // offset 정보가 존재하지 않을 경우
-        // latest = 가장 마지막 offset 부터
-        // earliest = 가장 처음 offset 부터
-        private String autoOffsetReset = OffsetReset.LATEST;
-
-        public Builder(String ip, int port, List<String> topics) {
-            this.ip = ip;
-            this.port = port;
-            this.topics = topics;
-            this.groupName = UUID.randomUUID().toString();
-        }
-
-        public Builder groupName(String groupName) {
-            this.groupName = groupName;
-            return this;
-        }
-
-        public Builder sizeBatchReceive(int num) {
-            this.sizeBatchReceive = num;
-            return this;
-        }
-
-        public Builder pollWaitingMS(int num) {
-            this.pollWaitingMS = num;
-            return this;
-        }
-
-        public Builder autoOffsetReset(String offsetReset) {
-            this.autoOffsetReset = offsetReset;
-            return this;
-        }
-
-        public KafkaConsumerEZ build() {
-            return new KafkaConsumerEZ(this);
-        }
-    }
 
     public KafkaConsumerEZ(Builder builder) {
         Properties kafkaProp = new Properties();
@@ -86,5 +42,54 @@ public class KafkaConsumerEZ {
 
     public void close() {
         consumer.close();
+    }
+
+    /* ============================= Builder ============================= */
+    public static class Builder {
+        private final String ip;
+        private final int port;
+        private List<String> topics;
+        private String groupName;
+        private int sizeBatchReceive = 1;
+        private int pollWaitingMS = 1000;
+
+        // offset 정보가 존재하지 않을 경우
+        // latest = 가장 마지막 offset 부터
+        // earliest = 가장 처음 offset 부터
+        private String autoOffsetReset = OffsetReset.LATEST;
+
+        public Builder(String ip, int port) {
+            this.ip = ip;
+            this.port = port;
+        }
+
+        public Builder topics(String... topics) {
+            this.topics =  new ArrayList<>(Arrays.asList(topics));
+            return this;
+        }
+
+        public Builder groupName(String groupName) {
+            this.groupName = groupName;
+            return this;
+        }
+
+        public Builder sizeBatchReceive(int num) {
+            this.sizeBatchReceive = num;
+            return this;
+        }
+
+        public Builder pollWaitingMS(int num) {
+            this.pollWaitingMS = num;
+            return this;
+        }
+
+        public Builder autoOffsetReset(String offsetReset) {
+            this.autoOffsetReset = offsetReset;
+            return this;
+        }
+
+        public KafkaConsumerEZ build() {
+            return new KafkaConsumerEZ(this);
+        }
     }
 }
