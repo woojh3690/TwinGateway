@@ -15,7 +15,7 @@
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-        <!-- kakfa-clients의 선행 요구조건 -->
+        <!-- kafka-clients의 선행 요구조건 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
