@@ -18,11 +18,13 @@ public abstract class TwinDB implements Runnable {
 
     @Override
     public void run() {
-        try {
-            StoreJob job = queue.take();
-            receiveJob(job.dataCode, job.datetime, job.value);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (true) {
+            try {
+                StoreJob job = queue.take();
+                receiveJob(job.dataCode, job.datetime, job.value);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
