@@ -28,7 +28,7 @@ public class Worker {
         // DB 데몬 초기화
         int numOfDBDaemon = Integer.parseInt(prop.getProperty("DB_NUM_OF_DAEMON"));
         for (int i = 0; i < numOfDBDaemon; i++) {
-            this.threadManager.newDaemon(new MariaDB());
+            this.threadManager.newDaemon(new MariaDB(i));
         }
     }
 
